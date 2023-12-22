@@ -39,7 +39,14 @@ function isPositive(number) {
  *  -0.1, 0, 0.2  => 0.2
  */
 function getMaxNumber(a, b, c) {
-  
+  let actualMaxNumber = 0;
+  const inputArgs = [a, b, c];
+  for (let i = 0; i < inputArgs.length; i += 1) {
+    if (actualMaxNumber < inputArgs[i]) {
+      actualMaxNumber = inputArgs[i];
+    }
+  }
+  return actualMaxNumber;
 }
 
 /**
