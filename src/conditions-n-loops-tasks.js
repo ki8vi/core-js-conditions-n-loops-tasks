@@ -123,8 +123,21 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const unitOfRoman = {
+    1: 'I',
+    2: 'II',
+    4: 'IV',
+    5: 'V',
+    8: 'VIII',
+    10: 'X',
+    13: 'XIII',
+    19: 'XIX',
+    21: 'XXI',
+    29: 'XXIX',
+    37: 'XXXVII',
+  };
+  return unitOfRoman[num];
 }
 
 /**
@@ -142,8 +155,41 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  const unitsOfNumbers = {
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+  };
+  let finalStr = '';
+  const space = ' ';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '.':
+        finalStr += 'point ';
+        break;
+      case ',':
+        finalStr += 'point ';
+        break;
+      case '-':
+        finalStr += 'minus ';
+        break;
+      default:
+        if (numberStr.length > 1 && i !== numberStr.length - 1) {
+          finalStr += unitsOfNumbers[numberStr[i]] + space;
+        } else {
+          finalStr += unitsOfNumbers[numberStr[i]];
+        }
+    }
+  }
+  return finalStr;
 }
 
 /**
