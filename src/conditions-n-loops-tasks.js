@@ -319,8 +319,51 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const finalOutputArr = [];
+  for (let i = 0; i < size; i += 1) {
+    finalOutputArr[i] = [null];
+  }
+
+  function recurseMatrix(
+    beginHorizontal,
+    closeHorizontal,
+    beginVertical,
+    closeVertical,
+    amount
+  ) {
+    if (beginHorizontal > closeHorizontal && beginVertical > closeVertical) {
+      return;
+    }
+    let innerOfArr = amount;
+    let startX = beginHorizontal;
+    let stopX = closeHorizontal;
+    let startY = beginVertical;
+    let stopY = closeVertical;
+    for (let i = startY; i <= stopY; i += 1) {
+      innerOfArr += 1;
+      finalOutputArr[startX][i] = innerOfArr;
+    }
+    startX += 1;
+    for (let i = startX; i <= stopX; i += 1) {
+      innerOfArr += 1;
+      finalOutputArr[i][stopY] = innerOfArr;
+    }
+    stopY -= 1;
+    for (let i = stopY; i >= startY; i -= 1) {
+      innerOfArr += 1;
+      finalOutputArr[stopX][i] = innerOfArr;
+    }
+    stopX -= 1;
+    for (let i = stopX; i >= startX; i -= 1) {
+      innerOfArr += 1;
+      finalOutputArr[i][startY] = innerOfArr;
+    }
+    startY += 1;
+    recurseMatrix(startX, stopX, startY, stopY, innerOfArr);
+  }
+  recurseMatrix(0, size - 1, 0, size - 1, 0);
+  return finalOutputArr;
 }
 
 /**
